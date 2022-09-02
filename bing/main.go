@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -38,18 +39,34 @@ type BingImage struct {
 	Hs            []interface{} `json:"hs"`
 }
 
+var savePicDir string
+var groupByMonth string
+
 // https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=10&nc=1612409408851&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160
 func main() {
-	var savePicDir string
-	flag.StringVar(&savePicDir, "p", "./pic", "文件夹路径")
+
+	flag.StringVar(&savePicDir, "download", "./pic/", "文件夹路径")
+	flag.StringVar(&groupByMonth, "group", "N", "文件夹路径")
 	flag.Parse()
 
-	_, err := os.Stat(savePicDir)
+	i := len(savePicDir)
+	if !os.IsPathSeparator(savePicDir[i-1]) {
+		savePicDir += string(os.PathSeparator)
+	}
+
+	image, err := getImageInfo()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if strings.ToUpper(groupByMonth) == "Y" {
+		savePicDir += image.Startdate[:6]
+	}
+	_, err = os.Stat(savePicDir)
 	if os.IsNotExist(err) {
 		os.MkdirAll(savePicDir, 0666)
 	}
-
-	image, _ := getImageInfo()
 	saveImage(image, savePicDir)
 }
 
