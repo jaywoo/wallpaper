@@ -31,7 +31,8 @@ go run bing/main.go -group y -download ./pic_test
 2. 输入： crontab -e
 3. 在打开的文档中输入：10 9 * * * /home/bing -downland $HOME/Pictures  #(每天9点10分执行命令)
 4. 按esc-->按 Shift+: --> 输入 wq #(保存并退出)
-PS: mac os 应该也可以这样添加
+
+> PS: mac os 应该也可以这样添加
 
 ##### Windows 添加启动项:
 1. 右键可执行程序，创建快捷方式
