@@ -1,12 +1,15 @@
 # wallpaper
 ## _目录说明_
-- bing 获取bing每日图片
+- bing 获取bing壁纸代码
 
 
 ## 介绍
-项目通过调用官方相关接口获取4k图片
+项目通过调用相关接口获取4k壁纸地址进行下载
 
-执行程序下载今日bing的背景图片，默认图片会下载到当前目录 pic目录下。
+执行程序下载今日bing壁纸（4k分辨率），默认图片会当前目录创建pic目录，将图片下载到pic目录。
+修改下载目录参见[参数说明](https://github.com/jaywoo/wallpaper/#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)
+
+
 下载完成后会将图片名称和Copyright信息写入到introduction.txt文件中。
 
 
