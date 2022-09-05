@@ -34,7 +34,7 @@ go run bing/main.go -group y -download ./pic_test
 
 > PS: mac os 应该也可以这样添加
 
-##### Windows 添加启动项:
+##### Windows10 添加启动项:
 1. 右键可执行程序，创建快捷方式
 2. 右键快捷方式-->属性。 在目标框中可以添加下载目录（可选），例 ：
   
@@ -42,4 +42,18 @@ go run bing/main.go -group y -download ./pic_test
   
 3. 按 Windows 徽标键  + R，键入“shell:startup”，然后选择“确定”。这将打开“启动”文件夹。
 4. 将该应用的快捷方式从文件位置复制并粘贴到“启动”文件夹中。
+
+##### Windows10 添加定时任务:
+1. 复制“任务计划程序”
+2. 按 Windows 徽标键, --> Ctrl+v ，打开“任务计划程序”
+3. 点击“创建基本任务...”
+
+![image](https://user-images.githubusercontent.com/7802535/188389802-edc2d298-3658-4552-99a9-2c9dc096dc4b.png)
+
+4. 按照提示完成操作即可
+
+
+
+
+
 
