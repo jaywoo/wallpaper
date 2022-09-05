@@ -19,7 +19,7 @@ bing -download <your download dir> -group n
 ```sh
 go run bing/main.go -group y -download ./pic_test
 ```
-## 参数说明
+### 参数说明
 | Param | Type |README |
 | ------ | ------ | ------ |
 | -download |string| 参数不指定图片将下载到当前目录下的 pic目录中 |
