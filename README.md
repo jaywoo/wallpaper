@@ -19,16 +19,21 @@ bing -download <your download dir> -group n
 ```sh
 go run bing/main.go -group y -download ./pic_test
 ```
-### 参数说明
+#### 参数说明
 | Param | Type |README |
 | ------ | ------ | ------ |
 | -download |string| 参数不指定图片将下载到当前目录下的 pic目录中 |
 | -group |y/n| 默认值为n，图片保存在当前目录下。y：图片会在当前目录下按月建立文件夹分组 |
 
-## 添加任务：
-添加定时任务或开机启动，自动下载。linux和mac 直接使用Crond 即可。
+#### 添加任务：
+添加定时任务或开机启动，自动下载。linux和mac 直接使用Crond 即可。例：
+1. 打开命令行
+2. 输入： crontab -e
+3. 在打开的文档中输入：10 9 * * * /home/bing -downland $HOME/Pictures  #(每天9点10分执行命令)
+4. 按esc-->按 Shift+: --> 输入 wq #(保存并退出)
 
-Windows 添加启动项:
+
+##### Windows 添加启动项:
 1. 右键可执行程序，创建快捷方式
 2. 右键快捷方式-->属性。 在目标框中可以添加下载目录（可选），例 ：
   
