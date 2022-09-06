@@ -54,24 +54,26 @@ func main() {
 		savePicDir += string(os.PathSeparator)
 	}
 
-	image, err := getImageInfo()
+	images, err := getImageInfo()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	if strings.ToUpper(groupByMonth) == "Y" {
-		savePicDir += image.Startdate[:6]
+	for _, image := range images {
+		if strings.ToUpper(groupByMonth) == "Y" {
+			savePicDir += image.Startdate[:6]
+		}
+		_, err = os.Stat(savePicDir)
+		if os.IsNotExist(err) {
+			os.MkdirAll(savePicDir, 0666)
+		}
+		saveImage(&image, savePicDir)
 	}
-	_, err = os.Stat(savePicDir)
-	if os.IsNotExist(err) {
-		os.MkdirAll(savePicDir, 0666)
-	}
-	saveImage(image, savePicDir)
 }
 
-func getImageInfo() (*BingImage, error) {
-	picNum := 1 //获取图片数
+func getImageInfo() ([]BingImage, error) {
+	picNum := 10 //获取图片数 ，观察接口一页仅显示8个（猜测不会返回更多）
 	nc := time.Now().UnixNano()
 	baseURI := fmt.Sprintf("/HPImageArchive.aspx?format=js&idx=0&n=%d&nc=%d&pid=hp&FORM=BEHPTB&uhd=1&uhdwidth=3840&uhdheight=2160", picNum, nc)
 	reqURL := fmt.Sprintf("%s%s", baseDomain, baseURI)
@@ -88,10 +90,10 @@ func getImageInfo() (*BingImage, error) {
 	if err := json.Unmarshal(body, &bingResp); err != nil {
 		return nil, err
 	}
-	if len(bingResp.Images) > 1 {
+	if len(bingResp.Images) < 1 {
 		return nil, fmt.Errorf("获取图片数量错误")
 	}
-	return &bingResp.Images[0], nil
+	return bingResp.Images, nil
 }
 
 func saveImage(img *BingImage, savePicDir string) {
