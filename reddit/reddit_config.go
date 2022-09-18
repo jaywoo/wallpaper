@@ -3,7 +3,7 @@ package reddit
 // IndexDomain 首页域名
 const IndexDomain = "https://www.reddit.com"
 
-//IndexURL 首页URI
+// IndexURL 首页URI
 const IndexURL = "/r/wallpapers.json"
 
 const PageDomain = "https://gateway.reddit.com"
@@ -131,7 +131,6 @@ type SecureMediaEmbed struct {
 type Gildings struct {
 }
 
-//
 type ImageSetting struct {
     URL    string `json:"url"`
     Width  int    `json:"width"`

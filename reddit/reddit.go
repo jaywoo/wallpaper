@@ -12,11 +12,10 @@ import (
 	// "os"
 	// "strings"
 	// "time"
-	"wallpaper/common"
 )
 
 // SpiderIndexPage 爬取首页
-func SpiderIndexPage() {
+func SpiderIndexPage(savePicDir string) {
 	reqURL := fmt.Sprintf("%s%s", IndexDomain, IndexURL)
 	// res, err := common.SendRequest(http.MethodGet, reqURL, nil, 500)
 	// fmt.Println(string(res), err)
@@ -28,13 +27,24 @@ func SpiderIndexPage() {
 	json.Unmarshal([]byte(res), &indexData)
 	fmt.Println(indexData.Data.After)
 	for _, child := range indexData.Data.Children {
-		if child.Data.PostHint != "image" || child.Data.IsGallery {
+		if child.Data.PostHint != "image" || child.Data.IsGallery || child.Data.IsVideo {
 			continue
 		}
 		// fmt.Println(child.Data.Title, child.Data.IsGallery, child.Data.IsRedditMediaDomain, child.Data.PostHint, child.Data.URL)
 		// fmt.Println(child.Data.WhitelistStatus, child.Data.NoFollow, child.Data.Title, child.Data.IsGallery, child.Data.PostHint, child.Data.URL, child.Data.Permalink)
 		fmt.Println(child.Data.Title, child.Data.URL)
-		err := common.DownloadImg(child.Data.URL, "./pic")
-		fmt.Println(err)
+		// err := common.DownloadImg(child.Data.URL, savePicDir)
+		// fmt.Println(err)
+		saveImageInfo(child.Data)
 	}
+
+}
+
+func saveImageInfo(img interface{}) {
+	infoMap := make(map[string]string)
+	switch img.(type) {
+	case IndexData:
+		infoMap["title"] = img.(IndexData).Title
+	}
+	fmt.Println(infoMap)
 }

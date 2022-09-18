@@ -3,6 +3,7 @@ package common
 import (
 	"fmt"
 	"io/ioutil"
+
 	// "log"
 	"io"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 	"time"
 )
 
-//SendRequest 带超时的请求
+// SendRequest 带超时的请求
 func SendRequest(method, apiURL string, bodyData url.Values, timeout int) ([]byte, error) {
 	start := time.Now()
 
@@ -53,7 +54,7 @@ func SendRequest(method, apiURL string, bodyData url.Values, timeout int) ([]byt
 	return respBody, nil
 }
 
-//SendRequestDo 带超时的请求
+// SendRequestDo 带超时的请求
 func sendRequestDo(method, apiURL string, bodyData url.Values, timeout int) (resp *http.Response, err error) {
 	request, _ := http.NewRequest(method, apiURL, strings.NewReader(bodyData.Encode()))
 	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
@@ -83,7 +84,6 @@ func DownloadImg(imgURL, downDir string) error {
 	imgFilePath := fmt.Sprintf("%s%s", downDir, u.Path)
 	_, err = os.Stat(imgFilePath)
 	if !os.IsNotExist(err) {
-		fmt.Println("文件已存在")
 		return fmt.Errorf("file exists: %s", imgFilePath)
 	}
 
