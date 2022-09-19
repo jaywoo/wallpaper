@@ -1,4 +1,7 @@
 *.zip
 *.exe
+*.jpg
+*.png
 /pic
 /*/pic
+*.DS_Store

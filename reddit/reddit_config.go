@@ -6,21 +6,22 @@ const IndexDomain = "https://www.reddit.com"
 // IndexURL 首页URI
 const IndexURL = "/r/wallpapers.json"
 
+//PageDomain 网关域名，下一页的数据
 const PageDomain = "https://gateway.reddit.com"
-const PageURL = "/desktopapi/v1/subreddits/wallpapers?rtj=only&redditWebClient=web2x&app=web2x-client-production&include=prefsSubreddit&after=t3_xaj8zg&dist=3&forceGeopopular=false&layout=card&sort=hot"
+const PageURL = "/desktopapi/v1/subreddits/wallpapers"
 
 type RedditPageData struct {
-    Posts                map[string]PagePost `json:"posts"`
-    Token                string              `json:"token"`
-    Dist                 int                 `json:"dist"`
-    Account              interface{}         `json:"account"`
-    Features             interface{}         `json:"features"`
-    ListingSort          string              `json:"listingSort"`
-    SubredditPermissions interface{}         `json:"subredditPermissions"`
-    Preferences          interface{}         `json:"preferences"`
-    StructuredStyles     interface{}         `json:"structuredStyles"`
+    Posts                map[string]PagePostData `json:"posts"`
+    Token                string                  `json:"token"`
+    Dist                 int                     `json:"dist"`
+    Account              interface{}             `json:"account"`
+    Features             interface{}             `json:"features"`
+    ListingSort          string                  `json:"listingSort"`
+    SubredditPermissions interface{}             `json:"subredditPermissions"`
+    Preferences          interface{}             `json:"preferences"`
+    StructuredStyles     interface{}             `json:"structuredStyles"`
 }
-type PagePost struct {
+type PagePostData struct {
     ID              string      `json:"id"`
     NumComments     int         `json:"numComments"`
     Created         int64       `json:"created"`
