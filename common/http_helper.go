@@ -74,14 +74,13 @@ func sendRequestDo(method, apiURL string, bodyData url.Values, timeout int) (res
 }
 
 // DownloadImg 下载图片
-func DownloadImg(imgURL, downDir string) error {
+func DownloadImg(imgURL, imageName, downDir string) error {
 	_, err := os.Stat(downDir)
 	if os.IsNotExist(err) {
 		os.MkdirAll(downDir, 0666)
 	}
 
-	u, _ := url.Parse(imgURL)
-	imgFilePath := fmt.Sprintf("%s%s", downDir, u.Path)
+	imgFilePath := fmt.Sprintf("%s/%s", downDir, imageName)
 	_, err = os.Stat(imgFilePath)
 	if !os.IsNotExist(err) {
 		return fmt.Errorf("file exists: %s", imgFilePath)

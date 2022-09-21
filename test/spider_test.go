@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"testing"
 	"wallpaper/common"
-	"wallpaper/reddit"
+	"wallpaper/spider/msbing"
+	"wallpaper/spider/reddit"
 )
 
 // TestReddit 首页
@@ -18,5 +19,9 @@ func TestRedditPage(t *testing.T) {
 }
 func TestDownloadImage(t *testing.T) {
 	img := "https://p4.ssl.qhimg.com/t01ee06478bb11783ee.jpg"
-	fmt.Println(common.DownloadImg(img, "./"))
+	fmt.Println(common.DownloadImg(img, "t01ee06478bb11783ee.jpg", "./"))
+}
+
+func TestBing(t *testing.T) {
+	msbing.Spider("./pic")
 }
